@@ -24,8 +24,8 @@ fetch(apiUrl)
     const speakersContainer = document.getElementById("speakers-container");
 
     function createCard(container, name, title, link, description, avatar, day, country) {
-      // Maak een div-element aan voor de kaart
-      const card = document.createElement("div");
+      // Maak een element aan voor de kaart
+      const card = document.createElement("article");
       card.classList.add("card");
 
       // Voeg inhoud toe aan de kaart
