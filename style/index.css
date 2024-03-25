@@ -1,5 +1,19 @@
+:root {
+    --widthcard: 20.25vw;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 main {
-    --widthcard: 13.5vw;
     display: grid;
     grid-template-columns: repeat(3, max-content);
     grid-template-rows: repeat(2, max-content);
