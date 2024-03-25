@@ -1,0 +1,15 @@
+/***************************/
+/*****CUSTOM PROPERTIES*****/
+/***************************/
+:root {
+    --color-primary: #9932cc;
+    --color-primary-light: #b366ff;
+    --color-primary-dark: #6a0080;
+    --color-secondary: #fff;
+    --color-tertiary: #000;
+    --color-quaternary: #909090;
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+    --fontsize-primary: 1.4rem;
+    --fontsize-secondary: 1.0rem;
+}
