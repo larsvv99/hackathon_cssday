@@ -9,10 +9,11 @@
     --color-primary: #9932cc;
     --color-primary-light: #b366ff;
     --color-primary-dark: #6a0080;
+    --color-primary-darker: rgb(70, 22, 95);
     --color-secondary: #fff;
     --color-tertiary: #000;
     --color-quaternary: #909090;
-    --font-primary: 'Roboto', sans-serif;
+    --font-primary: "Source Code Pro", monospace;
     --font-secondary: 'Open Sans', sans-serif;
     --fontsize-primary: 1.4rem;
     --fontsize-secondary: 1.0rem;
@@ -29,14 +30,14 @@ body {
 }
 
 section {
-    background-color: rgb(70, 22, 95);
+    background-color: var(--color-primary-darker);
     display: grid;
     height: 30em;
     width: 30em;
     place-items: center;
     position: relative;
     border-radius: 30px;
-    box-shadow: var(--color-primary-dark) 0 0 0 5px,
+    box-shadow: var(--color-primary-darker) 0 0 0 5px,
         rgb(95, 32, 126) inset 0 0 10px 65px,
         rgb(83, 28, 111) inset 0 0 5px 75px,
         rgb(78, 26, 104) inset 0 0 5px 85px;
@@ -95,8 +96,8 @@ body section div {
 
 iframe {
     border-radius: 5px;
-    width: 15em;
-    height: 8em;
+    width: 17em;
+    height: 9em;
 }
 
 ul {
@@ -109,6 +110,7 @@ ul {
 li {
     list-style: none;
     color: white;
+    font-family: var(--font-primary);
 }
 
 article {

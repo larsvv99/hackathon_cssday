@@ -9,6 +9,7 @@
     --color-primary: #9932cc;
     --color-primary-light: #b366ff;
     --color-primary-dark: #6a0080;
+    --color-primary-darker: rgb(70, 22, 95);
     --color-secondary: #fff;
     --color-tertiary: #000;
     --color-quaternary: #909090;
@@ -20,16 +21,17 @@
 
 /* Achterkant kaartje */
 html {
-    width: 100vh;
+    width: 100%;
     height: 100vh;
 }
 
 body {
     margin: 1em;
+    width: 100%;
 }
 
 section {
-    background-color: rgb(70, 22, 95);
+    background-color: var(--color-primary-darker);
     display: grid;
     height: 30em;
     width: 30em;
@@ -95,7 +97,7 @@ body section div {
 
 iframe {
     border-radius: 5px;
-    width: 15em;
+    width: 10em;
     height: 8em;
 }
 
@@ -109,7 +111,10 @@ ul {
 li {
     list-style: none;
     color: white;
+    font-family: "Source Code Pro", monospace;
+
 }
+
 
 article {
     position: absolute;
