@@ -49,7 +49,7 @@ fetch(apiUrl)
         <li>Website: ${link}</li>
       </ul>
       </article>
-      `;
+      ` ;
 
             // Voeg de kaart toe aan de container
             container.appendChild(card);
