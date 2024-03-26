@@ -23,21 +23,33 @@ fetch(apiUrl)
 
         const speakersContainer = document.getElementById("speakers-container");
 
+    const speakersContainer = document.getElementById("speakers-container");
+    let counter = 0;
 
-    function createCard(container, name, title, link, description, avatar, day, country) {
+    function createCard(container, name, title, link, description, avatar, day, country, attendees) {
+      counter++;
+
+
       // Maak een element aan voor de kaart
       const card = document.createElement("article");
+      card.id = `card-${counter}`;
+      
       card.classList.add("card");
 
-            // Voeg inhoud toe aan de kaart
-            card.innerHTML = `
-        <h2>${title}</h2>
-        <p>Host: ${name}</p>
-        <p>Afkomst: ${country}</p>
-        <p>Spreekt op dag: ${day}</p>
-        <p>Link: ${link}</p>
-        <p>${description}</p>
-        <img src="${avatar}">
+      // Voeg inhoud toe aan de kaart
+      card.innerHTML = `
+
+      <ul>
+        <li><img src="${avatar}" alt="image of ${name}"></li>
+        <li><h2>Name: ${name}</h2></li>
+        <li>Nationality: ${country}</li>
+        <li>Title: ${title}</li>
+        <li>Description: ${description}</li>
+        <li>Speaks on: ${day}</li>
+        <li>Website: ${link}</li>
+        <li><input type="radio" name="card-btn" id="card-btn-${counter}"></li>
+      </ul>
+
       `;
 
             // Voeg de kaart toe aan de container
@@ -49,23 +61,24 @@ fetch(apiUrl)
             const speakerInfo = speakers2023[speakerKey];
             let speakerInfoDesc;
 
-            if (speakerInfo.talk.description === false) {
-                speakerInfoDesc = "";
-            } else {
-                speakerInfoDesc = speakerInfo.talk.description;
-            }
+      if(speakerInfo.talk.description === false) {
+        speakerInfoDesc = "No description yet :)";
+      } else {
+        speakerInfoDesc = speakerInfo.talk.description;
+      }
 
-            createCard(speakersContainer, speakerInfo.name, speakerInfo.talk.title,
-                speakerInfo.link, speakerInfoDesc, speakerInfo.avatar, speakerInfo.day, speakerInfo.country);
-        });
-
-        // Itereer over de mc's en maak een kaart voor elke mc
-        Object.keys(mc2023).forEach(mcKey => {
-            const mcInfo = mc2023[mcKey];
-            createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "");
-        });
-    })
-    .catch(error => {
-        // Vang eventuele fouten op
-        console.error('There was a problem with the fetch operation:', error);
+      createCard(speakersContainer, speakerInfo.name, speakerInfo.talk.title, 
+        speakerInfo.link, speakerInfoDesc, speakerInfo.avatar, speakerInfo.day, speakerInfo.country, speakerInfo.attendees);
     });
+
+    // Itereer over de mc's en maak een kaart voor elke mc
+    Object.keys(mc2023).forEach(mcKey => {
+      const mcInfo = mc2023[mcKey];
+      createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "");
+    });
+  })
+  .catch(error => {
+    // Vang eventuele fouten op
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
