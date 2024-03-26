@@ -21,8 +21,6 @@ fetch(apiUrl)
         mc2023 = data["2023"].mc;
         attendees2023 = data["2023"].attendees;
 
-        const speakersContainer = document.getElementById("speakers-container");
-
     const speakersContainer = document.getElementById("speakers-container");
     let counter = 0;
 

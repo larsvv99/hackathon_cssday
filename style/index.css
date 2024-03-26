@@ -170,7 +170,7 @@ main section:nth-of-type(6) article:nth-of-type(3) {
 
 main section:nth-of-type(6) article:nth-of-type(4) {
     grid-area: 7/2/8/4;
-
+}
 
 .card {
     width: 30em;
