@@ -1,0 +1,116 @@
+/***************************/
+/*****CUSTOM PROPERTIES*****/
+/***************************/
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #9932cc;
+    --color-primary-light: #b366ff;
+    --color-primary-dark: #6a0080;
+    --color-secondary: #fff;
+    --color-tertiary: #000;
+    --color-quaternary: #909090;
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+    --fontsize-primary: 1.4rem;
+    --fontsize-secondary: 1.0rem;
+}
+
+/* Achterkant kaartje */
+html {
+    width: 100vh;
+    height: 100vh;
+}
+
+body {
+    margin: 1em;
+}
+
+section {
+    background-color: rgb(70, 22, 95);
+    display: grid;
+    height: 30em;
+    width: 30em;
+    place-items: center;
+    position: relative;
+    border-radius: 30px;
+    box-shadow: var(--color-primary-dark) 0 0 0 5px,
+        rgb(95, 32, 126) inset 0 0 10px 65px,
+        rgb(83, 28, 111) inset 0 0 5px 75px,
+        rgb(78, 26, 104) inset 0 0 5px 85px;
+
+
+
+    &::before {
+        content: "";
+        width: 30em;
+        height: 3.5em;
+        top: 0;
+        left: 0;
+        background-color: var(--color-primary);
+        border-radius: 30px 30px 0 0;
+        position: absolute;
+        box-sizing: border-box;
+        border: 3px black solid;
+        z-index: 3;
+    }
+
+    &::after {
+        content: "";
+        width: 30em;
+        height: 3.5em;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color-primary);
+        position: absolute;
+        border-radius: 0 0 30px 30px;
+        box-sizing: border-box;
+        border: 3px black solid;
+        z-index: 1;
+    }
+}
+
+body section div {
+    background-color: var(--color-primary);
+    width: 3.5em;
+    height: 30em;
+    position: absolute;
+    border-radius: 30px 0 0 30px;
+    top: 0;
+    left: 0;
+    border: solid 3px black;
+    z-index: 2;
+
+    &:nth-of-type(2) {
+        border-radius: 0 30px 0 0;
+        right: 0;
+        height: 26.5em;
+        left: unset;
+        z-index: 4;
+        border-bottom: 0;
+    }
+}
+
+iframe {
+    border-radius: 5px;
+    width: 15em;
+    height: 8em;
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 3em;
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+    color: white;
+}
+
+article {
+    position: absolute;
+}
