@@ -36,7 +36,12 @@ fetch(apiUrl)
 
       // Voeg inhoud toe aan de kaart
       card.innerHTML = `
-
+      <label>
+          <input type="radio" name="sprekers" value="${name}">${name}</input>
+      </label>
+      <label>
+          <input type="radio" name="sprekers" value="sluiten"></input>
+      </label>
       <ul>
         <li><img src="${avatar}" alt="image of ${name}"></li>
         <li><h2>Name: ${name}</h2></li>
