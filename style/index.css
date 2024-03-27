@@ -132,6 +132,7 @@ body {
     z-index: 5;
     background-color: var(--color-secondary);
     animation: unset;
+    text-decoration: none;
 
     &:hover {
         &:before {
