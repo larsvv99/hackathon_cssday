@@ -34,6 +34,39 @@ body {
     flex-direction: column;
     background-color: white;
     font-family: var(--font-family);
+    background: rgba(255, 255, 255, 0.178);
+}
+
+/* ********** */
+/* BACKGROUND */
+/* ********** */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.gradient {
+    --size: 50vw;
+    width: var(--size);
+    height: var(--size);
+    filter: blur(calc(var(--size) / 5));
+    background-image: linear-gradient(90deg, rgb(180, 156, 191) 9%, rgba(150, 47, 246, 0.533) 100%);
+    animation: rotate 3s cubic-bezier(0.5, 0.5, 0.5, 0.5) infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    z-index: -100;
+    position: absolute;
+}
+
+@media (min-width: 720px) {
+    .gradient {
+        --size: 500px;
+    }
 }
 
 .sluiten {
@@ -270,7 +303,10 @@ div:nth-of-type(7) {
     grid-area: 9/7/10/10;
 }
 
-#card-3:hover:before, #card-12:hover:before, #card-14:hover:before, #card-15:hover:before {
+#card-3:hover:before,
+#card-12:hover:before,
+#card-14:hover:before,
+#card-15:hover:before {
     transform: translate(-50%, -50%) rotate(90deg);
     transform-origin: center center;
 }
