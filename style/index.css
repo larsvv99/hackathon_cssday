@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 /***************************/
 /*****CUSTOM PROPERTIES*****/
@@ -17,59 +20,155 @@
     --font-secondary: 'Open Sans', sans-serif;
     --fontsize-primary: 1.4rem;
     --fontsize-secondary: 1.0rem;
-    --widthcard: 100%
+    --widthcard: 100%;
+    --font-family: "Source Code Pro", sans-serif;
 }
 
 body {
     width: 100vw;
     height: 100vh;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    font-family: Roboto, sans-serif;
+    font-family: var(--font-family);
+    background: rgba(255, 255, 255, 0.178);
+}
+
+/* ********** */
+/* BACKGROUND */
+/* ********** */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.gradient {
+    --size: 50vw;
+    width: var(--size);
+    height: var(--size);
+    filter: blur(calc(var(--size) / 5));
+    background-image: linear-gradient(90deg, rgb(180, 156, 191) 9%, rgba(150, 47, 246, 0.533) 100%);
+    animation: rotate 3s cubic-bezier(0.5, 0.5, 0.5, 0.5) infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    z-index: -100;
+    position: absolute;
+}
+
+@media (min-width: 720px) {
+    .gradient {
+        --size: 500px;
+    }
 }
 
 .sluiten {
-    background-color: yellowgreen;
-    width: 2rem;
-    height: 1rem;
+    background-color: black;
+    width: 3rem;
+    height: 3rem;
     display: none;
     z-index: 10;
     position: absolute;
     top: 0;
     right: 0;
+    font-family: var(--font-family);
+    border-top-right-radius: 5px;
 
+    &:before {
+        content: "X";
+        color: var(--color-secondary);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .card {
     display: block;
-    width: var(--widthcard);
+    width: -webkit-fill-available;
     height: 100%;
     background-color: var(--color-tertiary);
-    border-radius: calc(var(--widthcard) * .05);
+    border-radius: 15px;
     border: 0 solid darkorchid;
-    position: relative;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    transition: 200ms;
     position: relative;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    opacity: 0;
+    cursor: pointer;
+    animation:
+        var(--moveIn1, hallo) 1s var(--delay, 0s) ease-in-out 1 forwards,
+        var(--moveIn2, hallo) 1s var(--delay, 0s) ease-in-out 1 forwards,
+        Glow 10s linear infinite;    transition: .3s;
+    transform: translate(0, 0);
 }
 
+.loaded .card{
+      animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  opacity: 0;
+}
 
-a:target {
-    width: 50em;
-    height: 50em;
+@keyframes Glow {
+    93% {
+        background-color: black;
+    }
+
+    95% {
+        background-color: darkorchid;
+    }
+
+    100% {
+        background-color: black;
+    }
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card:before {
     position: absolute;
-    top: 30%;
-    border: 10px solid darkorchid;
-    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-    &::after {
+.card:hover:before {
+    content: attr(data-name);
+    color: var(--color-secondary);
+    text-decoration: none;
+    text-align: center;
+}
+
+.card:target {
+    width: 50em;
+    height: max-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid darkorchid;
+    color: darkorchid;
+    z-index: 5;
+    background-color: var(--color-secondary);
+    animation: unset;
+    text-decoration: none;
+    transition: unset;
+
+    &:hover {
+        &:before {
+            content: "";
+        }
+    }
+
+    &:after {
         content: "";
         inset: 0;
         position: absolute;
@@ -85,67 +184,24 @@ a:target {
         z-index: 0;
         border-radius: 20px;
     }
-}
 
-a:target ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 5;
-}
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
 
-a:target .sluiten {
-    display: block;
-}
+        li:last-of-type {
+            z-index: 5;
+        }
+    }
 
-.card ul {
-    display: none;
+    .sluiten {
+        display: block;
+    }
 }
 
 li {
     list-style-type: none;
-}
-
-:root:has([value="sanne"]:checked) {
-    --card: sanne;
-}
-
-@container style(--card: sanne) {
-    .card label:nth-of-type(1) {
-        display: none;
-    }
-
-    .card {
-        width: 30em;
-        height: 30em;
-        position: absolute;
-        top: 30%;
-        border: 10px solid darkorchid;
-
-        &::after {
-            content: "";
-            inset: 0;
-            position: absolute;
-            background-image: linear-gradient(115deg in oklch,
-                    transparent 0%,
-                    var(--color-quaternary) 25%,
-                    transparent 47%,
-                    transparent 53%,
-                    var(--color-quaternary) 75%,
-                    transparent 100%);
-            mix-blend-mode: color-dodge;
-            opacity: 0.3;
-            z-index: 0;
-            border-radius: 20px;
-        }
-    }
-
-    .card ul {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
 }
 
 /* **** */
@@ -168,172 +224,193 @@ div {
     width: var(--widthcard);
     height: 100%;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
+    animation: var(--moveIn1, hallo) 1s var(--delay, 0s) ease-in-out 1 forwards,
+        var(--moveIn2, hallo) 1s var(--delay, 0s) ease-in-out 1 forwards;
     opacity: 0;
+}
+
+ul {
+    display: none;
 }
 
 /* C */
 .loaded #card-1 {
     grid-area: 1/1/2/6;
-    animation-name: fromLeft;
+    --moveIn1: fromLeft;
 
 }
 
 div:nth-of-type(1) {
     grid-area: 4/1/8/2;
-    animation-name: fromBottom;
+    --moveIn1: fromBottom;
 }
 
 #card-2 {
     grid-area: 7/3/8/6;
-    animation-name: fromRight;
+    --moveIn1: fromRight;
 }
 
 /* S */
 
 .loaded div:nth-of-type(2) {
     grid-area: 1/9/2/12;
-    animation-name: sPopup, toTop;
-    animation-delay: 1s;
+    --moveIn1: sPopup;
+    --moveIn2: toTop;
+    --delay: 1s;
 }
 
 .loaded #card-3 {
     grid-area: 1/7/5/8;
-    animation-name: sPopup, toLeft;
-    animation-delay: 1s;
+    --moveIn1: sPopup;
+    --moveIn2: toLeft;
+    --delay: 1s;
 }
 
 .loaded div:nth-of-type(3) {
     grid-area: 4/9/5/10;
-    animation-name: middlePop;
-    animation-delay: 1s;
+    --moveIn1: middlePop;
+    --delay: 1s;
 }
 
 .loaded #card-4 {
     grid-area: 4/11/8/12;
-    animation-name: sPopup, toRight;
-    animation-delay: 1s;
+    --moveIn1: sPopup;
+    --moveIn2: toRight;
+    --delay: 1s;
 }
 
 .loaded #card-5 {
     grid-area: 7/7/8/10;
-    animation-name: sPopup, toBottom;
-    animation-delay: 1s;
+    --moveIn1: sPopup;
+    --moveIn2: toBottom;
+    --delay: 1s;
 }
 
 /* s2 */
 .loaded #card-6 {
     grid-area: 1/15/2/18;
-    animation-name: sPopup, toTop;
-    animation-delay: 1.5s;
+    --moveIn1: sPopup;
+    --moveIn2: toTop;
+    --delay: 1.5s;
 }
 
 .loaded #card-7 {
     grid-area: 1/13/5/14;
-    animation-name: sPopup, toLeft;
-    animation-delay: 1.5s;
+    --moveIn1: sPopup;
+    --moveIn2: toLeft;
+    --delay: 1.5s;
 }
 
 
 .loaded div:nth-of-type(4) {
     grid-area: 4/15/5/16;
-    animation-name: middlePop;
-    animation-delay: 1.5s;
+    --moveIn1: middlePop;
+    --delay: 1.5s;
 }
 
 .loaded div:nth-of-type(5) {
     grid-area: 4/17/8/18;
-    animation-name: sPopup, toRight;
-    animation-delay: 1.5s;
+    --moveIn1: sPopup;
+    --moveIn2: toRight;
+    --delay: 1.5s;
 }
 
 .loaded #card-8 {
     grid-area: 7/13/8/16;
-    animation-name: sPopup, toBottom;
-    animation-delay: 1.5s;
+    --moveIn1: sPopup;
+    --moveIn2: toBottom;
+    --delay: 1.5s;
 }
 
 /* d*/
 
 .loaded #card-9 {
     grid-area: 9/1/10/4;
-    animation-name: fromLeft;
-    animation-delay: 2s
+    --moveIn1: fromLeft;
+    --delay: 2s
 }
 
 .loaded div:nth-of-type(6) {
     grid-area: 9/5/13/6;
-    animation-name: fromBottom;
-    animation-delay: 2.1s;
+    --moveIn1: fromBottom;
+    --delay: 2.1s;
 }
 
 .loaded #card-10 {
     grid-area: 15/3/16/6;
-    animation-name: fromBottom;
-    animation-delay: 2.3s;
+    --moveIn1: fromBottom;
+    --delay: 2.3s;
 }
 
 .loaded div:nth-of-type(7) {
     grid-area: 12/1/16/2;
-    animation-name: fromLeft;
-    animation-delay: 2.4s;
+    --moveIn1: fromLeft;
+    --delay: 2.4s;
 }
 
 /* a */
 
 .loaded #card-11 {
     grid-area: 9/7/10/10;
-    animation-name: sPopup, toTop;
-    animation-delay: 2s;
+    --moveIn1: sPopup;
+    --moveIn2: toTop;
+    --delay: 2s;
 }
 
 .loaded #card-12 {
     grid-area: 9/11/16/12;
-    animation-name: sPopup, toRight;
-    animation-delay: 2s;
+    --moveIn1: sPopup;
+    --moveIn2: toRight;
+    --delay: 2s;
 }
 
 .loaded #card-13 {
     grid-area: 12/9/13/10;
-    animation-name: middlePop;
-    animation-delay: 2s;
+    --moveIn1: middlePop;
+    --delay: 2s;
 }
 
 .loaded div:nth-of-type(8) {
     grid-area: 12/7/16/8;
-    animation-name: sPopup, toLeft;
-    animation-delay: 2s;
+    --moveIn1: sPopup;
+    --moveIn2: toLeft;
+    --delay: 2s;
 }
 
 /* y */
 
 .loaded #card-14 {
     grid-area: 9/13/13/14;
-    animation-name: fromRight;
-    animation-delay: 2s
+    --moveIn1: fromRight;
+    --delay: 2s
 }
 
 .loaded div:nth-of-type(9) {
     grid-area: 12/15/13/16;
-    animation-name: fromBottom;
-    animation-delay: 2.1s;
+    --moveIn1: fromBottom;
+    --delay: 2.1s;
 }
 
 .loaded #card-15 {
     grid-area: 9/17/16/18;
-    animation-name: fromRight;
-    animation-delay: 2.4s;
+    --moveIn1: fromRight;
+    --delay: 2.4s;
 
 }
 
 .loaded #card-16 {
     grid-area: 15/14/16/16;
-    animation-name: fromBottom;
-    animation-delay: 2.3s;
+    --moveIn1: fromBottom;
+    --delay: 2.3s;
 }
 
+#card-3:hover:before,
+#card-12:hover:before,
+#card-14:hover:before,
+#card-15:hover:before {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center center;
+}
 
 @keyframes fromLeft {
     0% {
