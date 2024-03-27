@@ -75,8 +75,6 @@ fetch(apiUrl)
             const mcInfo = mc2023[mcKey];
             createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "");
         });
-        document.documentElement.classList.add('loaded');
-
     })
     .catch(error => {
         // Vang eventuele fouten op
