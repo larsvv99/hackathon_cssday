@@ -27,6 +27,10 @@ fetch(apiUrl)
         function createCard(container, name, title, link, description, avatar, day, country, attendees) {
             counter++;
 
+            // Maak een element aan voor de kaart
+            const card = document.createElement("a");
+            card.id = `card-${counter}`;
+            card.href = `#card-${counter}`;
 
             // Maak een element aan voor de kaart
             const card = document.createElement("a");
