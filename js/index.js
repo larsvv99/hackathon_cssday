@@ -32,25 +32,26 @@ fetch(apiUrl)
             const card = document.createElement("a");
             card.id = `card-${counter}`;
             card.href = `#card-${counter}`;
+            card.setAttribute("data-name", `${name}`);
 
             card.classList.add("card");
 
             // Voeg inhoud toe aan de kaart
             card.innerHTML = `
-      <article>
-      <a href="#sluiten" class="sluiten"></a>
-      <ul>
-        <li><img src="${avatar}" alt="image of ${name}"></li>
-        <li><h2>Name: ${name}</h2></li>
-        <li>Nationality: ${country}</li>
-        <li>Title: ${title}</li>
-        <li>Description: ${description}</li>
-        <li>Speaks on: ${day}</li>
-        <li>Website: ${link}</li>
-      </ul>
-      </article>
-      `;
-
+                <article>
+                    <a href="#sluiten" class="sluiten"></a>
+                    <ul>
+                        <li><img src="${avatar}" alt="image of ${name}"></li>
+                        <li><h2>Name: ${name}</h2></li>
+                        <li>Nationality: ${country}</li>
+                        <li>Title: ${title}</li>
+                        <li>Description: ${description}</li>
+                        <li>Speaks on: Day ${day}</li>
+                        <li><a href="${link}">Website: ${link}</a></li>
+                    </ul>
+                </article>
+            `;
+            
             // Voeg de kaart toe aan de container
             container.appendChild(card);
         }
