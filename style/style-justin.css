@@ -13,7 +13,7 @@
     --color-secondary: #fff;
     --color-tertiary: #000;
     --color-quaternary: #909090;
-    --font-primary: 'Roboto', sans-serif;
+    --font-primary: "Source Code Pro", monospace;
     --font-secondary: 'Open Sans', sans-serif;
     --fontsize-primary: 1.4rem;
     --fontsize-secondary: 1.0rem;
@@ -21,16 +21,15 @@
 
 /* Achterkant kaartje */
 html {
-    width: 100%;
+    width: 100vh;
     height: 100vh;
 }
 
 body {
     margin: 1em;
-    width: 100%;
 }
 
-section {
+section:nth-of-type(1) {
     background-color: var(--color-primary-darker);
     display: grid;
     height: 30em;
@@ -38,10 +37,11 @@ section {
     place-items: center;
     position: relative;
     border-radius: 30px;
-    box-shadow: var(--color-primary-dark) 0 0 0 5px,
-        rgb(95, 32, 126) inset 0 0 10px 65px,
-        rgb(83, 28, 111) inset 0 0 5px 75px,
-        rgb(78, 26, 104) inset 0 0 5px 85px;
+    box-shadow: var(--color-primary-darker) 0 0 0 5px,
+        #0006 inset 4.5em 4.5em 1em,
+        #fff1 inset -4.5em -4.5em 1em;
+    /* #0002 inset 0 0 5px 75px, */
+    /* #0002 inset 0 0 5px 85px; */
 
 
 
@@ -72,7 +72,28 @@ section {
         border: 3px black solid;
         z-index: 1;
     }
+
+
 }
+
+@keyframes linearGradient {
+    0% {
+        background-position: right bottom;
+    }
+
+    100% {
+        background-position: left top;
+    }
+}
+
+@property --p {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+
+
 
 body section div {
     background-color: var(--color-primary);
@@ -93,12 +114,34 @@ body section div {
         z-index: 4;
         border-bottom: 0;
     }
+
+    &:nth-of-type(3) {
+        width: 23em;
+        height: 23em;
+        position: absolute;
+        top: 3.5em;
+        left: 3.5em;
+        border-radius: 0 0 0 0;
+        background-color: transparent;
+
+        &:hover {
+            background-image: linear-gradient(115deg in oklch,
+                    transparent 0% 40%,
+                    lightgray 44%,
+                    transparent 48%,
+                    transparent 52%,
+                    lightgray 56%,
+                    transparent 60% 100%);
+            background-size: 300% 300%;
+            animation: linearGradient 2s linear infinite;
+        }
+    }
 }
 
 iframe {
     border-radius: 5px;
-    width: 10em;
-    height: 8em;
+    width: 17em;
+    height: 9em;
 }
 
 ul {
@@ -111,10 +154,8 @@ ul {
 li {
     list-style: none;
     color: white;
-    font-family: "Source Code Pro", monospace;
-
+    font-family: var(--font-primary);
 }
-
 
 article {
     position: absolute;
