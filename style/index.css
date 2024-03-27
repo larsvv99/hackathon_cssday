@@ -36,28 +36,6 @@ body {
     font-family: var(--font-family);
 }
 
-#speakers-container {
-    /* position: relative; */
-}
-
-/* #speakers-container::after {
-    content: "Line-up!";
-    position: absolute;
-    bottom: -75px;
-    left: 50%;
-    width: 12vw;
-    height: 85px;
-    background-color: darkorchid;
-    border-radius: 10px;
-    transform: translate(-50%) rotate(10deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5vw;
-    font-weight: bold;
-    color: var(--color-secondary);
-} */
-
 .sluiten {
     background-color: black;
     width: 3rem;
@@ -82,7 +60,7 @@ body {
 
 .card {
     display: block;
-    width: 100%;
+    width: -webkit-fill-available;
     height: 100%;
     background-color: var(--color-tertiary);
     border-radius: 15px;
@@ -91,6 +69,8 @@ body {
     position: relative;
     cursor: pointer;
     animation: Glow 10s linear infinite;
+    transition: .7s;
+    transform: translate(0, 0);
 }
 
 @keyframes Glow {
@@ -107,6 +87,10 @@ body {
     }
 }
 
+.card:hover {
+    transform: scale(1.1);
+}
+
 .card:before {
     position: absolute;
     top: 50%;
@@ -118,6 +102,7 @@ body {
     content: attr(data-name);
     color: var(--color-secondary);
     text-decoration: none;
+    text-align: center;
 }
 
 .card:target {
@@ -133,6 +118,7 @@ body {
     background-color: var(--color-secondary);
     animation: unset;
     text-decoration: none;
+    transition: unset;
 
     &:hover {
         &:before {
