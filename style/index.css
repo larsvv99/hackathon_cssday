@@ -102,7 +102,7 @@ body {
     position: relative;
     cursor: pointer;
     animation: Glow 10s linear infinite;
-    transition: .7s;
+    transition: .3s;
     transform: translate(0, 0);
 }
 
