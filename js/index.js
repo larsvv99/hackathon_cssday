@@ -15,8 +15,7 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
-        const speakers2023 = data["2023"].speakers;
-        const mc2023 = data["2023"].mc;
+
         const talks2023 = data["2023"].talks;
 
         const speakersContainer = document.getElementById("speakers-container");
@@ -57,7 +56,6 @@ fetch(apiUrl)
                 <article class="card-face card-back">
                     <div></div>
                     <section>
-                        <iframe src="${videoLink}" allowfullscreen frameborder="0"></iframe> 
                         <img src="${videoThumbnail}" alt="Thumbnail">
                         <a href="${videoLink}" target="_blank">Link: ${videoLink}</a>
                         <p>Aantal views: ${views}</p>
@@ -88,13 +86,6 @@ fetch(apiUrl)
                  talksInfo.speaker[0].country, talksInfo.video.views, talksInfo.video.likes, talksInfo.video.thumbnail, talksInfo.video['youtube-link']);
         });
 
-        // Itereer over de mc's en maak een kaart voor elke mc
-        Object.keys(mc2023).forEach(mcKey => {
-            const mcInfo = mc2023[mcKey];
-            createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "", "", "", "");
-        });
-
-
         let cardsToFlip = document.querySelectorAll('.card');
         cardsToFlip.forEach(cardEl => {
             let cardButtonFront = cardEl.querySelector('.toggleCardBtnFront');
@@ -107,9 +98,7 @@ fetch(apiUrl)
             cardButtonBack.addEventListener('click', function() {
                 cardEl.classList.remove("is-flipped");
             });
-
         });
-
 
         document.documentElement.classList.add('loaded');
 
