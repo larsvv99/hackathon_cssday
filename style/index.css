@@ -144,7 +144,7 @@ body {
 
 .card:target {
     width: 50em;
-    height: max-content;
+    height: 50em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -164,7 +164,7 @@ body {
         }
     }
 
-    &:after {
+    /* &:after {
         content: "";
         inset: 0;
         position: absolute;
@@ -179,7 +179,7 @@ body {
         opacity: 0.3;
         z-index: 0;
         border-radius: 20px;
-    }
+    } */
 
     ul {
         display: flex;
@@ -188,6 +188,15 @@ body {
 
         li:last-of-type {
             z-index: 5;
+        }
+    }
+    > article {
+        width: 100%;
+        height: 100%;
+
+        .card-content-container {
+            height: 100%;
+            width: 100%;
         }
     }
 
@@ -200,6 +209,66 @@ li {
     list-style-type: none;
 }
 
+
+/* ********* */
+/* CARD FLIP */
+/* ********* */
+
+
+.card:target {
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+.card:target .card-face {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+.card:target .card-front {
+    background: white;
+}
+
+.card-back {
+    background: blue;
+    transform: rotateY(180deg);
+}
+
+.card-back p, .card-back img, .card-back a{
+    display: none;
+}
+
+.card:target .card-back p, .card:target .card-back img, .card:target .card-back a {
+    display: block;
+}
+
+.card.is-flipped {
+    transform: translate(-50%, -50%) rotateY(180deg);
+}
+
+.card:target div {
+    border-radius: 5px;
+    box-sizing: unset;
+    border: none;
+}
+
+.card:target .toggleCardBtnFront, .card:target .toggleCardBtnBack {
+    display: block;
+}
+
+.toggleCardBtnFront, .toggleCardBtnBack {
+    position: absolute;
+    bottom: 0;
+    display: none;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+
+
 /* **** */
 /* LOGO */
 /* **** */
@@ -211,7 +280,6 @@ li {
     place-items: center;
     grid-template-columns: 4fr 1fr 8fr 1fr 4fr 2fr 4fr 1fr 8fr 1fr 4fr 2fr 4fr 1fr 8fr 1fr 4fr;
     grid-template-rows: 4fr 1fr 1fr 4fr 1fr 1fr 4fr 2fr 4fr 1fr 1fr 4fr 1fr 1fr 4fr;
-
 }
 
 div {
