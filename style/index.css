@@ -330,6 +330,7 @@ li {
     max-width: 37.5rem;
     height: 100%;
     position: absolute;
+    border-radius: 15px;
     top: 0;
     z-index: 0;
     display: flex;
