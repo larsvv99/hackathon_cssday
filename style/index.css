@@ -13,6 +13,7 @@
     --color-primary: #9932cc;
     --color-primary-light: #b366ff;
     --color-primary-dark: #6a0080;
+    --color-primary-darker: rgb(70, 22, 95);
     --color-secondary: #fff;
     --color-tertiary: #000;
     --color-quaternary: #909090;
@@ -71,8 +72,8 @@ body {
 
 .sluiten {
     background-color: black;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     display: none;
     z-index: 10;
     position: absolute;
@@ -92,7 +93,10 @@ body {
 }
 
 .card {
-    display: block;
+
+    display: flex;
+    align-items: center;
+    width: 100%;
     width: -webkit-fill-available;
     height: 100%;
     background-color: var(--color-tertiary);
@@ -143,25 +147,72 @@ body {
 }
 
 .card:target {
-    width: 50em;
-    height: 50em;
+
+    width: 80%;
+    max-width: 37.5rem;
+    height: max-content;
+    max-height: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 10px solid darkorchid;
-    color: darkorchid;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    color: white;
     z-index: 5;
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary-darker);
     animation: unset;
     text-decoration: none;
+    padding: 1em;
+    padding-block: 3em;
+    box-shadow: var(--color-primary-darker) 0 0 0 5px,
+        #0006 inset 4.5em 4.5em 1em,
+        #fff1 inset -4.5em -4.5em 1em;
+    
+
+
+
+    &::before {
+        content: "";
+        width: 100%;
+        height: 3.5em;
+        background-color: var(--color-primary);
+        border-radius: 15px 15px 0 0;
+        position: absolute;
+
+        box-shadow: var(--color-primary-darker) 0 0 0 5px;
+        z-index: 10;
+        top: 0;
+        right: 0;
+    }
+
+    &::after {
+        content: "";
+        width: 100%;
+        height: 3.5em;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color-primary);
+        position: absolute;
+        border-radius: 0 0 15px 15px;
+        box-shadow: var(--color-primary-darker) 0 0 0 5px;
+        z-index: 1;
+    }
+
     transition: unset;
     opacity: 1;
+
 
     &:hover {
         &:before {
             content: "";
         }
+    }
+
+    a {
+        text-decoration: dotted;
+        color: white;
     }
 
     /* &:after {
@@ -181,14 +232,74 @@ body {
         border-radius: 20px;
     } */
 
+
     ul {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin: 0;
+        padding: 1rem;
 
-        li:last-of-type {
-            z-index: 5;
+
+        li {
+            max-width: 80%;
+            min-width: 50%;
+            display: flex;
+            justify-content: center;
         }
+
+        li a {
+            display: none;
+        }
+
+        li:nth-of-type(1) {
+            align-self: center;
+            display: flex;
+        }
+
+        li:nth-of-type(2) {
+            align-self: center;
+            display: flex;
+        }
+
+        li:nth-of-type(3) {
+            align-self: center;
+            display: flex;
+
+        }
+
+        li:nth-of-type(4) {
+            align-self: center;
+            display: inline;
+            order: 1;
+        }
+
+        li:nth-of-type(5) {
+            align-self: center;
+            display: inline;
+            order: 2;
+        }
+
+        li:nth-of-type(6) {
+            align-self: center;
+            display: flex;
+
+        }
+
+        li:nth-of-type(7) {
+            align-self: center;
+            display: flex;
+
+        }
+
+
+
+        img {
+            width: 40%;
+            aspect-ratio: 1/1;
+        }
+
+
     }
     > article {
         width: 100%;
@@ -202,12 +313,22 @@ body {
 
     .sluiten {
         display: block;
+        top: 2em;
+        right: 4em;
     }
 }
 
 li {
     list-style-type: none;
 }
+
+.card article {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 100%;
+    width: 100%;
+}
+
 
 
 /* ********* */
@@ -265,9 +386,6 @@ li {
     width: 100px;
     height: 100px;
 }
-
-
-
 
 /* **** */
 /* LOGO */
@@ -423,6 +541,7 @@ ul {
     --delay: 2s;
 }
 
+    
 .loaded #card-12 {
     grid-area: 9/11/16/12;
     --moveIn1: sPopup;
