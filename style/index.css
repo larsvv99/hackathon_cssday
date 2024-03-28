@@ -150,7 +150,6 @@ body {
 
     width: 80%;
     max-width: 37.5rem;
-    height: max-content;
     max-height: 80%;
     position: absolute;
     top: 50%;
@@ -169,7 +168,8 @@ body {
     box-shadow: var(--color-primary-darker) 0 0 0 5px,
         #0006 inset 4.5em 4.5em 1em,
         #fff1 inset -4.5em -4.5em 1em;
-    
+
+
 
 
 
@@ -180,7 +180,6 @@ body {
         background-color: var(--color-primary);
         border-radius: 15px 15px 0 0;
         position: absolute;
-
         box-shadow: var(--color-primary-darker) 0 0 0 5px;
         z-index: 10;
         top: 0;
@@ -200,10 +199,6 @@ body {
         z-index: 1;
     }
 
-    transition: unset;
-    opacity: 1;
-
-
     &:hover {
         &:before {
             content: "";
@@ -215,31 +210,14 @@ body {
         color: white;
     }
 
-    /* &:after {
-        content: "";
-        inset: 0;
-        position: absolute;
-        background-image: linear-gradient(115deg in oklch,
-                transparent 0%,
-                var(--color-quaternary) 25%,
-                transparent 47%,
-                transparent 53%,
-                var(--color-quaternary) 75%,
-                transparent 100%);
-        mix-blend-mode: color-dodge;
-        opacity: 0.3;
-        z-index: 0;
-        border-radius: 20px;
-    } */
-
 
     ul {
+        justify-self: center;
         display: flex;
         flex-direction: column;
         gap: 10px;
         margin: 0;
         padding: 1rem;
-
 
         li {
             max-width: 80%;
@@ -292,16 +270,16 @@ body {
 
         }
 
-
-
         img {
             width: 40%;
             aspect-ratio: 1/1;
+            box-shadow: 0px 0px 25px 5px rgba(255, 255, 255, 0.5);
         }
 
 
     }
-    > article {
+
+    >article {
         width: 100%;
         height: 100%;
 
@@ -340,28 +318,53 @@ li {
     transition: transform 1s;
     transform-style: preserve-3d;
 }
+
 .card:target .card-face {
-    position: absolute;
-    height: 100%;
+    height: max-content;
     width: 100%;
     backface-visibility: hidden;
 }
 
-.card:target .card-front {
-    background: white;
-}
-
-.card-back {
-    background: blue;
+.card:target .card-back {
+    width: 100%;
+    max-width: 37.5rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    color: white;
+    background-color: var(--color-primary-darker);
+    text-decoration: none;
+    padding: 1em;
+    padding-block: 3em;
+    box-shadow: var(--color-primary-darker) 0 0 0 5px,
+        #0006 inset 4.5em 4.5em 1em,
+        #fff1 inset -4.5em -4.5em 1em;
     transform: rotateY(180deg);
+
 }
 
-.card-back p, .card-back img, .card-back a{
+.card-back p,
+.card-back img,
+.card-back a {
     display: none;
 }
 
-.card:target .card-back p, .card:target .card-back img, .card:target .card-back a {
+.card:target .card-back p,
+.card:target .card-back img,
+.card:target .card-back a {
     display: block;
+    align-self: center;
+}
+
+.card:target .card-back img {
+    width: 80%;
+    box-shadow: 0px 0px 25px 5px rgba(255, 255, 255, 0.5);
+
 }
 
 .card.is-flipped {
@@ -374,17 +377,29 @@ li {
     border: none;
 }
 
-.card:target .toggleCardBtnFront, .card:target .toggleCardBtnBack {
+.card:target .toggleCardBtnFront,
+.card:target .toggleCardBtnBack {
     display: block;
+    width: 2em;
+    height: 2em;
+    background-color: #b366ff;
+    z-index: 10;
+    position: absolute;
 }
 
-.toggleCardBtnFront, .toggleCardBtnBack {
-    position: absolute;
-    bottom: 0;
+.card:target .toggleCardBtnBack {
+    top: 2rem;
+}
+
+.card:target .toggleCardBtnFront {
+    top: 2rem;
+}
+
+.toggleCardBtnFront,
+.toggleCardBtnBack {
     display: none;
-    z-index: 10;
-    width: 100px;
-    height: 100px;
+
+
 }
 
 /* **** */
@@ -541,7 +556,7 @@ ul {
     --delay: 2s;
 }
 
-    
+
 .loaded #card-12 {
     grid-area: 9/11/16/12;
     --moveIn1: sPopup;

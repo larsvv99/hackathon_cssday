@@ -46,14 +46,14 @@ fetch(apiUrl)
                         <li>Speaks on: day ${day}</li>
                         <li>${link}</li>
                     </ul>
-                    <button type="button" class="toggleCardBtnFront">Toggle</button>
+                    <button type="button" class="toggleCardBtnFront">T</button>
                 </article>
                 <article class="card-face card-back">
                     <img src="${videoThumbnail}" alt="Thumbnail">
                     <a href="${videoLink}" target="_blank">Link: ${videoLink}</a>
                     <p>${views}</p>
                     <p>${likes}</p>
-                    <button type="button" class="toggleCardBtnBack">Toggle</button>
+                    <button type="button" class="toggleCardBtnBack">T</button>
                 </article>
             `;
 
