@@ -190,7 +190,8 @@ body {
             z-index: 5;
         }
     }
-    > article {
+
+    >article {
         width: 100%;
         height: 100%;
 
@@ -216,9 +217,10 @@ li {
 
 
 .card:target {
-    transition: transform 1s;
+    transition: transform .5s;
     transform-style: preserve-3d;
 }
+
 .card:target .card-face {
     position: absolute;
     height: 100%;
@@ -231,20 +233,58 @@ li {
 }
 
 .card-back {
-    background: blue;
     transform: rotateY(180deg);
 }
 
-.card-back p, .card-back img, .card-back a{
+.card-back p,
+.card-back img,
+.card-back a {
     display: none;
 }
 
-.card:target .card-back p, .card:target .card-back img, .card:target .card-back a {
+.card:target .card-back img {
     display: block;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
 }
+
+.card:target .card-back p:nth-of-type(1) {
+    display: block;
+    color: white;
+    top: 50%;
+    left: 40%;
+    position: absolute;
+    transform: translate(-50%);
+}
+
+.card:target .card-back p:nth-of-type(2) {
+    display: block;
+    color: white;
+    top: 50%;
+    left: 60%;
+    position: absolute;
+    transform: translate(-50%);
+}
+
+.card:target .card-back a {
+    display: block;
+    color: white;
+    top: 70%;
+    left: 40%;
+    position: absolute;
+    transform: translate(-30%);
+
+}
+
 
 .card.is-flipped {
     transform: translate(-50%, -50%) rotateY(180deg);
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--color-primary-dark) 0 0 0 5px,
+        #0006 inset -2.5em 2.5em 5em,
+        #fff1 inset 2.5em -2.5em 5em;
 }
 
 .card:target div {
@@ -253,11 +293,13 @@ li {
     border: none;
 }
 
-.card:target .toggleCardBtnFront, .card:target .toggleCardBtnBack {
+.card:target .toggleCardBtnFront,
+.card:target .toggleCardBtnBack {
     display: block;
 }
 
-.toggleCardBtnFront, .toggleCardBtnBack {
+.toggleCardBtnFront,
+.toggleCardBtnBack {
     position: absolute;
     bottom: 0;
     display: none;
