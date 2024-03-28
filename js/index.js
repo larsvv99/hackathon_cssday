@@ -91,7 +91,7 @@ fetch(apiUrl)
         // Itereer over de mc's en maak een kaart voor elke mc
         Object.keys(mc2023).forEach(mcKey => {
             const mcInfo = mc2023[mcKey];
-            createCard(speakersContainer, mcInfo.name, mcInfo.link, mcInfo.avatar);
+            createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "", "", "", "");
         });
 
 
