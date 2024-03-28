@@ -26,34 +26,45 @@ fetch(apiUrl)
             counter++;
 
             // Maak een element aan voor de kaart
-            const card = document.createElement("a");
+            const card = document.createElement("div");
             card.id = `card-${counter}`;
-            card.href = `#card-${counter}`;
             card.setAttribute("data-name", `${name}`);
-
             card.classList.add("card");
+
+            card.addEventListener("click", () => {
+                window.location = `#${card.id}`;
+            });
 
             // Voeg inhoud toe aan de kaart
             card.innerHTML = `
                 <article class="card-face card-front">
                     <a href="#sluiten" class="sluiten"></a>
-                    <ul>
-                        <li><img src="${avatar}" alt="image of ${name}"></li>
-                        <li><h2>${name}</h2></li>
-                        <li>${country}</li>
-                        <li>Title: ${title}</li>
-                        <li>Description: ${description}</li>
-                        <li>Speaks on: day ${day}</li>
-                        <li>${link}</li>
-                    </ul>
-                    <button type="button" class="toggleCardBtnFront">T</button>
+                    <div></div>
+                    <section>
+                        <ul>
+                            <li><img src="${avatar}" alt="image of ${name}"></li>
+                            <li><h2>${name}</h2></li>
+                            <li>${country}</li>
+                            <li>Title: ${title}</li>
+                            <li>Description: ${description}</li>
+                            <li>Speaks on: day ${day}</li>
+                            <li>${link}</li>
+                        </ul>
+                        <button type="button" class="toggleCardBtnFront">More info...</button>
+                    </section>
+                    <div></div>
                 </article>
                 <article class="card-face card-back">
-                    <img src="${videoThumbnail}" alt="Thumbnail">
-                    <a href="${videoLink}" target="_blank">Link: ${videoLink}</a>
-                    <p>${views}</p>
-                    <p>${likes}</p>
-                    <button type="button" class="toggleCardBtnBack">T</button>
+                    <div></div>
+                    <section>
+                        <iframe src="${videoLink}" allowfullscreen frameborder="0"></iframe> 
+                        <img src="${videoThumbnail}" alt="Thumbnail">
+                        <a href="${videoLink}" target="_blank">Link: ${videoLink}</a>
+                        <p>Aantal views: ${views}</p>
+                        <p>Aantal likes: ${likes}</p>
+                        <button type="button" class="toggleCardBtnBack">Back</button>
+                    </section>
+                    <div></div>
                 </article>
             `;
 
@@ -66,15 +77,11 @@ fetch(apiUrl)
             const talksInfo = talks2023[talksKey];
             let talksInfoDesc;
 
-            // console.log(talks2023);
-
             if (talksInfo.description === false) {
                 talksInfoDesc = "No description yet :)";
             } else {
                 talksInfoDesc = talksInfo.description;
             }
-            
-            console.log(talksInfo.video['youtube-link']);
 
             createCard(speakersContainer, talksInfo.speaker[0].name, talksInfo.title,
                 talksInfo.speaker[0].link, talksInfoDesc, talksInfo.speaker[0].avatar, talksInfo.day,
@@ -115,8 +122,7 @@ fetch(apiUrl)
 document.addEventListener("DOMContentLoaded", function () {
     // Functie om de delay aan te passen
     function updateDelay() {
-        const elements = document.querySelectorAll('.loaded a');
-        console.log(elements);
+        const elements = document.querySelectorAll('.loaded div');
         elements.forEach(element => {
             // Pas de --delay eigenschap aan naar 0
             element.style.setProperty('--delay', '0');
