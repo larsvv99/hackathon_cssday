@@ -1,10 +1,10 @@
-// // ---- API CALL ----
+// ---- API CALL ----
 
-// // Definieer de URL van de API
+// Definieer de URL van de API
 const apiUrl = 'https://cssday.nl/data.json';
 let dataSpeakers;
 
-// // Maak een GET-verzoek met Fetch API
+// Maak een GET-verzoek met Fetch API
 fetch(apiUrl)
     .then(response => {
         // Controleer of het verzoek succesvol was
@@ -15,16 +15,14 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
-        console.log(data["2023"]);
-        speakers2023 = data["2023"].speakers;
-        talks2023 = data["2023"].talks;
-        mc2023 = data["2023"].mc;
-        attendees2023 = data["2023"].attendees;
+        const speakers2023 = data["2023"].speakers;
+        const mc2023 = data["2023"].mc;
+        const talks2023 = data["2023"].talks;
 
         const speakersContainer = document.getElementById("speakers-container");
         let counter = 0;
 
-        function createCard(container, name, title, link, description, avatar, day, country, attendees) {
+        function createCard(container, name, title, link, description, avatar, day, country, views, likes, videoThumbnail, videoLink) {
             counter++;
 
             // Maak een element aan voor de kaart
@@ -37,17 +35,25 @@ fetch(apiUrl)
 
             // Voeg inhoud toe aan de kaart
             card.innerHTML = `
-                <article>
+                <article class="card-face card-front">
                     <a href="#sluiten" class="sluiten"></a>
                     <ul>
                         <li><img src="${avatar}" alt="image of ${name}"></li>
-                        <li><h2>Name: ${name}</h2></li>
-                        <li>Nationality: ${country}</li>
+                        <li><h2>${name}</h2></li>
+                        <li>${country}</li>
                         <li>Title: ${title}</li>
                         <li>Description: ${description}</li>
-                        <li>Speaks on: Day ${day}</li>
-                        <li><a href="${link}">Website: ${link}</a></li>
+                        <li>Speaks on: day ${day}</li>
+                        <li>${link}</li>
                     </ul>
+                    <button type="button" class="toggleCardBtnFront">Toggle</button>
+                </article>
+                <article class="card-face card-back">
+                    <img src="${videoThumbnail}" alt="Thumbnail">
+                    <a href="${videoLink}" target="_blank">Link: ${videoLink}</a>
+                    <p>${views}</p>
+                    <p>${likes}</p>
+                    <button type="button" class="toggleCardBtnBack">Toggle</button>
                 </article>
             `;
             
@@ -56,25 +62,48 @@ fetch(apiUrl)
         }
 
         // Itereer over de sprekers en maak een kaart voor elke spreker
-        Object.keys(speakers2023).forEach(speakerKey => {
-            const speakerInfo = speakers2023[speakerKey];
-            let speakerInfoDesc;
+        Object.keys(talks2023).forEach(talksKey => {
+            const talksInfo = talks2023[talksKey];
+            let talksInfoDesc;
 
-            if (speakerInfo.talk.description === false) {
-                speakerInfoDesc = "No description yet :)";
+            // console.log(talks2023);
+
+            if (talksInfo.description === false) {
+                talksInfoDesc = "No description yet :)";
             } else {
-                speakerInfoDesc = speakerInfo.talk.description;
+                talksInfoDesc = talksInfo.description;
             }
+            
+            console.log(talksInfo.video['youtube-link']);
 
-            createCard(speakersContainer, speakerInfo.name, speakerInfo.talk.title,
-                speakerInfo.link, speakerInfoDesc, speakerInfo.avatar, speakerInfo.day, speakerInfo.country, speakerInfo.attendees);
+            createCard(speakersContainer, talksInfo.speaker[0].name, talksInfo.title,
+                talksInfo.speaker[0].link, talksInfoDesc, talksInfo.speaker[0].avatar, talksInfo.day,
+                 talksInfo.speaker[0].country, talksInfo.video.views, talksInfo.video.likes, talksInfo.video.thumbnail, talksInfo.video['youtube-link']);
         });
 
         // Itereer over de mc's en maak een kaart voor elke mc
         Object.keys(mc2023).forEach(mcKey => {
             const mcInfo = mc2023[mcKey];
-            createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "");
+            createCard(speakersContainer, mcInfo.name, mcInfo.link, mcInfo.avatar);
         });
+
+
+        let cardsToFlip = document.querySelectorAll('.card');
+        cardsToFlip.forEach(cardEl => {
+            let cardButtonFront = cardEl.querySelector('.toggleCardBtnFront');
+            let cardButtonBack = cardEl.querySelector('.toggleCardBtnBack');
+
+            cardButtonFront.addEventListener('click', function() {
+                cardEl.classList.add('is-flipped');
+            });
+
+            cardButtonBack.addEventListener('click', function() {
+                cardEl.classList.remove("is-flipped");
+            });
+
+        });
+
+
     })
     .catch(error => {
         // Vang eventuele fouten op
