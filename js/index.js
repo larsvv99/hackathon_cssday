@@ -56,7 +56,7 @@ fetch(apiUrl)
                     <button type="button" class="toggleCardBtnBack">Toggle</button>
                 </article>
             `;
-            
+
             // Voeg de kaart toe aan de container
             container.appendChild(card);
         }
@@ -104,8 +104,25 @@ fetch(apiUrl)
         });
 
 
+        document.documentElement.classList.add('loaded');
+
     })
     .catch(error => {
         // Vang eventuele fouten op
         console.error('There was a problem with the fetch operation:', error);
     });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Functie om de delay aan te passen
+    function updateDelay() {
+        const elements = document.querySelectorAll('.loaded a');
+        console.log(elements);
+        elements.forEach(element => {
+            // Pas de --delay eigenschap aan naar 0
+            element.style.setProperty('--delay', '0');
+        });
+    }
+
+    // Wacht 6 seconden en roep dan de functie aan om de delay aan te passen
+    setTimeout(updateDelay, 6000);
+});
