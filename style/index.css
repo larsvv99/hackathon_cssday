@@ -156,8 +156,9 @@ body {
 
 .card:target {
     width: 80%;
+    max-width: 37.5rem;
     height: max-content;
-    max-height: 95%;
+    max-height: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -175,7 +176,7 @@ body {
     box-shadow: var(--color-primary-darker) 0 0 0 5px,
         #0006 inset 4.5em 4.5em 1em,
         #fff1 inset -4.5em -4.5em 1em;
-    /* overflow: auto; */
+    
 
 
 
