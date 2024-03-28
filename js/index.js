@@ -50,7 +50,7 @@ fetch(apiUrl)
                     </ul>
                 </article>
             `;
-            
+
             // Voeg de kaart toe aan de container
             container.appendChild(card);
         }
@@ -75,8 +75,25 @@ fetch(apiUrl)
             const mcInfo = mc2023[mcKey];
             createCard(speakersContainer, mcInfo.name, "", mcInfo.link, "", mcInfo.avatar, "", "", "");
         });
+        document.documentElement.classList.add('loaded');
+
     })
     .catch(error => {
         // Vang eventuele fouten op
         console.error('There was a problem with the fetch operation:', error);
     });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Functie om de delay aan te passen
+    function updateDelay() {
+        const elements = document.querySelectorAll('.loaded a');
+        console.log(elements);
+        elements.forEach(element => {
+            // Pas de --delay eigenschap aan naar 0
+            element.style.setProperty('--delay', '0');
+        });
+    }
+
+    // Wacht 6 seconden en roep dan de functie aan om de delay aan te passen
+    setTimeout(updateDelay, 6000);
+});
